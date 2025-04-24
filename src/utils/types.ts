@@ -3,7 +3,7 @@ export type BigNumberish = string | number | bigint;
 export type BytesLike = HexString | Uint8Array;
 export type HexString = string;
 
-/* Input */
+// --- WebAuthn  Input ---
 
 export type WebAuthnCreation = {
   user?: string;
@@ -21,7 +21,7 @@ export type WebAuthnParams = {
   webAuthnRequest: WebAuthnRequest;
 };
 
-/* Output */
+// --- WebAuthn output ---
 
 export type PublicKey = {
   x: bigint;
@@ -55,4 +55,16 @@ export type WebAuthnAuthentication = {
   authenticatorData: HexString;
   clientDataJson: string;
   signature: Signature;
+};
+
+// --- AAGUID ---
+
+export type AuthenticatorData = {
+  name: string;
+  icon_light?: string | null;
+  icon_dark?: string | null;
+};
+
+export type AuthenticatorMap = {
+  [key: string]: AuthenticatorData;
 };
