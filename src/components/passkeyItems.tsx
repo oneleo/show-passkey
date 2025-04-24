@@ -36,14 +36,14 @@ export const PasskeyItems = ({
     return (
       <div
         key={credentialId}
-        className={`flex w-[500px] cursor-pointer items-center justify-between rounded-lg border ${
+        className={`flex w-[600px] cursor-pointer items-center justify-start rounded-lg border ${
           credentialId === selectedCredentialId
             ? "border-blue-600 bg-blue-100"
             : "hover:bg-gray-200"
         }`}
         onClick={() => onSelect(credentialId)}
       >
-        <div className="flex h-32 w-32 items-center justify-center">
+        <div className="m-3 flex w-32 items-center justify-center">
           {darkMode ? (
             <img src={darkIcon ?? undefined} />
           ) : (
@@ -51,7 +51,7 @@ export const PasskeyItems = ({
           )}
         </div>
 
-        <div className="flex flex-col space-y-1">
+        <div className="m-1 flex h-[150px] w-[390px] flex-col items-start justify-center space-y-1">
           <span className="text-lg font-semibold text-gray-900">
             {authenticatorName}
           </span>
