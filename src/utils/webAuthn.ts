@@ -122,6 +122,7 @@ export const createWebAuthn = async (
   return {
     timestamp,
     origin: origin,
+    user: userDisplayName,
     credentialId: credIdBase64Url,
     publicKey: {
       x: credPubKeyX,

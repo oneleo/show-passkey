@@ -30,6 +30,7 @@ export type PublicKey = {
 
 export type WebAuthnBase = {
   timestamp: number;
+  user: string;
   credentialId: B64UrlString;
   aaguid: string;
   browser: string;
