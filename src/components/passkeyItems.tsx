@@ -138,7 +138,7 @@ export const PasskeyItems = ({
   }, [webAuthnItems]);
 
   return (
-    <div>
+    <>
       {processedItems.map((item) => (
         <AuthenticatorItem
           key={item.credentialId}
@@ -149,6 +149,6 @@ export const PasskeyItems = ({
           isSelected={item.credentialId === selectedCredentialId}
         />
       ))}
-    </div>
+    </>
   );
 };
