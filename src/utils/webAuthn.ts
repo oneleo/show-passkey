@@ -38,10 +38,10 @@ import type {
 export const createWebAuthn = async (
   params?: WebAuthnCreation,
 ): Promise<WebAuthnRegistration> => {
-  const timestamp = Date.now();
+  const createdAt = Date.now();
   const uaParser = new UAParser();
 
-  const utcIsoString = DateTime.fromMillis(timestamp).toUTC().toISO();
+  const utcIsoString = DateTime.fromMillis(createdAt).toUTC().toISO();
 
   const challengeBase64Url =
     params?.challenge && isoBase64URL.isBase64(params.challenge)
@@ -120,8 +120,8 @@ export const createWebAuthn = async (
   );
 
   return {
-    timestamp,
-    origin: origin,
+    createdAt,
+    origin,
     user: userDisplayName,
     credentialId: credIdBase64Url,
     publicKey: {
@@ -139,7 +139,7 @@ export const createWebAuthn = async (
 export const requestWebAuthn = async (
   params: WebAuthnRequest,
 ): Promise<WebAuthnAuthentication> => {
-  const timestamp = Date.now();
+  const lastUsed = Date.now();
 
   const authResJson = await startAuthentication({
     useBrowserAutofill: false,
@@ -167,7 +167,7 @@ export const requestWebAuthn = async (
   const sigUrlB64 = authResJson.response.signature;
   const [sigRUint, sigSUint] = parseSignature(sigUrlB64);
   return {
-    timestamp,
+    lastUsed,
     authenticatorData: authDataHex,
     clientDataJson: clientDataJsonUtf8,
     signature: {

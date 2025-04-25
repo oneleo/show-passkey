@@ -27,4 +27,6 @@ export type {
   WebAuthnParams,
   WebAuthnRegistration,
   WebAuthnRequest,
+  AuthenticatorData,
+  AuthenticatorMap,
 } from "./types";

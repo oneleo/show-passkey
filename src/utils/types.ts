@@ -29,7 +29,7 @@ export type PublicKey = {
 };
 
 export type WebAuthnBase = {
-  timestamp: number;
+  createdAt: number;
   user: string;
   credentialId: B64UrlString;
   aaguid: string;
@@ -52,7 +52,7 @@ export type Signature = {
 };
 
 export type WebAuthnAuthentication = {
-  timestamp: number;
+  lastUsed: number;
   authenticatorData: HexString;
   clientDataJson: string;
   signature: Signature;

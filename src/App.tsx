@@ -33,13 +33,13 @@ function App() {
     });
 
     addItem({
-      timestamp: regRes.timestamp,
+      createdAt: regRes.createdAt,
       user: regRes.user,
       credentialId: regRes.credentialId,
       aaguid: regRes.aaguid,
       browser: regRes.browser,
       os: regRes.os,
-      lastUsed: regRes.timestamp,
+      lastUsed: regRes.createdAt,
     });
   };
 
@@ -57,7 +57,7 @@ function App() {
       return;
     }
 
-    updateItem({ credentialId, lastUsed: authRes.timestamp });
+    updateItem({ credentialId, lastUsed: authRes.lastUsed });
   };
 
   const handlePasskeyUserNameChange = (input: string) => {
