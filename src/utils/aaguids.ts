@@ -1,10 +1,20 @@
 // Refer:
 // https://github.com/passkeydeveloper/passkey-authenticator-aaguids/blob/main/combined_aaguid.json
-import combinedAaguid from "./aaguids.json";
-import type { AuthenticatorMap } from "./types";
+import type { AuthenticatorData, AuthenticatorMap } from "./types";
 
-export const authenticators: AuthenticatorMap =
-  combinedAaguid as AuthenticatorMap;
+let aaguidsCache: AuthenticatorMap | null = null;
+
+export const getAuthenticatorData = async (
+  aaguid: string,
+): Promise<AuthenticatorData | undefined> => {
+  if (!aaguidsCache) {
+    const { default: loaded } = (await import("./aaguids.json")) as {
+      default: AuthenticatorMap;
+    };
+    aaguidsCache = loaded;
+  }
+  return aaguidsCache[aaguid];
+};
 
 // --- AAGUID tools ---
 // Explorer:

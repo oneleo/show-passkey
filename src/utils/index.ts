@@ -11,10 +11,12 @@ export { aaguids, bytes, json, webAuthn };
 export const { isHex, fromAny, concat, toString } = bytes;
 export const { stringify } = json;
 export const { createWebAuthn, requestWebAuthn } = webAuthn;
-export const { authenticators } = aaguids;
+export const { getAuthenticatorData } = aaguids;
 
 // --- Export Types ---
 export type {
+  AuthenticatorData,
+  AuthenticatorMap,
   B64UrlString,
   BigNumberish,
   BytesLike,
@@ -27,6 +29,4 @@ export type {
   WebAuthnParams,
   WebAuthnRegistration,
   WebAuthnRequest,
-  AuthenticatorData,
-  AuthenticatorMap,
 } from "./types";
