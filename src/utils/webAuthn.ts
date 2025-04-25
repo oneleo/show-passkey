@@ -101,22 +101,21 @@ export const createWebAuthn = async (
   const decodedAttObj = decodeAttestationObject(attestObjUint8Arr);
 
   const authData = parseAuthenticatorData(decodedAttObj.get("authData"));
+
+  const aaguid = authData.aaguid
+    ? convertAAGUIDToString(authData.aaguid)
+    : `00000000-0000-0000-0000-000000000000`;
+
   const credPubKeyUint8Arr = authData.credentialPublicKey!;
   const [credPubKeyX, credPubKeyY] =
     parseCredentialPublicKey(credPubKeyUint8Arr);
 
   console.log(
-    `[WebAuthn][debug]\nuserDisplayName: ${userDisplayName}\nchallengeBase64Url: ${challengeBase64Url}\ncredPubKeyXHex: 0x${credPubKeyX
+    `[WebAuthn][debug]\naaguid: ${aaguid}\nuserDisplayName: ${userDisplayName}\nchallengeBase64Url: ${challengeBase64Url}\ncredPubKeyXHex: 0x${credPubKeyX
       .toString(16)
       .padStart(64, "0")}\ncredPubKeyYHex: 0x${credPubKeyY
       .toString(16)
       .padStart(64, "0")}`,
-  );
-
-  console.log(
-    `aaguid:\n${!!authData.aaguid}\n${authData.aaguid}\n${convertAAGUIDToString(
-      authData.aaguid!,
-    )}`,
   );
 
   return {
@@ -128,9 +127,7 @@ export const createWebAuthn = async (
       x: credPubKeyX,
       y: credPubKeyY,
     },
-    aaguid: authData.aaguid
-      ? convertAAGUIDToString(authData.aaguid)
-      : `00000000-0000-0000-0000-000000000000`,
+    aaguid,
     browser: uaParser.getBrowser().name || `Unknown broswer`,
     os: uaParser.getOS().name || `Unknown OS`,
   };
