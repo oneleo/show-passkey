@@ -126,7 +126,6 @@ function App() {
           darkMode={false}
           webAuthnItems={webAuthnItems}
           deleteItem={deleteItem}
-          // onSelect={(id) => setSelectedCredentialId(id)}
           onSelect={setSelectedCredentialId}
           selectedCredentialId={selectedCredentialId}
         />

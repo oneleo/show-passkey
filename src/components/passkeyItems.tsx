@@ -8,18 +8,18 @@ const AuthenticatorItem = memo(
   ({
     item,
     darkMode,
-    isSelected,
-    onSelect,
     onDelete,
+    onSelect,
+    isSelected,
   }: {
     item: WebAuthnItem & {
       createdAtIso: string | null;
       lastUsedIso: string | null;
     };
     darkMode: boolean;
-    isSelected: boolean;
-    onSelect: (credentialId: string) => void;
     onDelete: (credentialId: string) => void;
+    onSelect: (credentialId: string | undefined) => void;
+    isSelected: boolean;
   }) => {
     const [authenticatorData, setAuthenticatorData] =
       useState<AuthenticatorData>();
@@ -111,15 +111,15 @@ const AuthenticatorItem = memo(
 export const PasskeyItems = ({
   darkMode,
   webAuthnItems,
-  selectedCredentialId,
   deleteItem,
   onSelect,
+  selectedCredentialId,
 }: {
   darkMode: boolean;
   webAuthnItems: WebAuthnItem[];
-  selectedCredentialId?: string;
   deleteItem: (credentialId: string) => void;
-  onSelect: (credentialId: string) => void;
+  onSelect: (credentialId: string | undefined) => void;
+  selectedCredentialId?: string;
 }) => {
   // Pre-process items only when webAuthnItems changes
   const processedItems = useMemo(() => {
@@ -144,9 +144,9 @@ export const PasskeyItems = ({
           key={item.credentialId}
           item={item}
           darkMode={darkMode}
-          isSelected={item.credentialId === selectedCredentialId}
-          onSelect={onSelect}
           onDelete={deleteItem}
+          onSelect={onSelect}
+          isSelected={item.credentialId === selectedCredentialId}
         />
       ))}
     </div>
