@@ -49,7 +49,7 @@ const AuthenticatorItem = memo(
         className={`flex w-[600px] cursor-pointer items-center justify-start rounded-lg border ${
           isSelected ? "border-blue-600 bg-blue-100" : "hover:bg-gray-200"
         }`}
-        onClick={() => onSelect(item.credentialId)}
+        onClick={() => onSelect(isSelected ? undefined : item.credentialId)}
       >
         {/* Authenticator icon */}
         <div className="m-3 flex w-32 items-center justify-center">
