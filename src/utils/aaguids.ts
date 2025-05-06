@@ -1,19 +1,19 @@
 // Refer:
 // https://github.com/passkeydeveloper/passkey-authenticator-aaguids/blob/main/combined_aaguid.json
-import type { AuthenticatorData, AuthenticatorMap } from "./types";
+import type { MetadataBLOBPayloadEntry, MetadataBLOBPayload } from "./types";
 
-let aaguidsCache: AuthenticatorMap | null = null;
+let aaguidsCache: MetadataBLOBPayload | null = null;
 
 export const getAuthenticatorData = async (
   aaguid: string,
-): Promise<AuthenticatorData | undefined> => {
+): Promise<MetadataBLOBPayloadEntry | undefined> => {
   if (!aaguidsCache) {
     const { default: loaded } = (await import("./aaguids.json")) as {
-      default: AuthenticatorMap;
+      default: MetadataBLOBPayload;
     };
     aaguidsCache = loaded;
   }
-  return aaguidsCache[aaguid];
+  return aaguidsCache.entries.find((entry) => entry.aaguid === aaguid);
 };
 
 // --- AAGUID tools ---

@@ -15,8 +15,8 @@ export const { getAuthenticatorData } = aaguids;
 
 // --- Export Types ---
 export type {
-  AuthenticatorData,
-  AuthenticatorMap,
+  MetadataBLOBPayloadEntry,
+  MetadataBLOBPayload,
   B64UrlString,
   BigNumberish,
   BytesLike,

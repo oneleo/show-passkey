@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { memo, useEffect, useMemo, useState } from "react";
-import type { AuthenticatorData, WebAuthnItem } from "../utils";
+import type { MetadataBLOBPayloadEntry, WebAuthnItem } from "../utils";
 import { getAuthenticatorData } from "../utils";
 
 // Component for rendering an individual authenticator item
@@ -22,7 +22,7 @@ const AuthenticatorItem = memo(
     isSelected: boolean;
   }) => {
     const [authenticatorData, setAuthenticatorData] =
-      useState<AuthenticatorData>();
+      useState<MetadataBLOBPayloadEntry>();
 
     useEffect(() => {
       async function loadAuthenticator() {
@@ -56,17 +56,17 @@ const AuthenticatorItem = memo(
           <img
             src={
               darkMode
-                ? (authenticatorData.icon_dark ?? undefined)
-                : (authenticatorData.icon_light ?? undefined)
+                ? (authenticatorData.metadataStatement.icon ?? undefined)
+                : (authenticatorData.metadataStatement.icon ?? undefined)
             }
-            alt={`${authenticatorData.name} icon`}
+            alt={`${authenticatorData.metadataStatement.description} icon`}
           />
         </div>
 
         {/* Authenticator details */}
         <div className="m-1 flex h-[150px] w-[390px] flex-col items-start justify-center space-y-1">
           <span className="text-lg font-semibold text-gray-900">
-            {authenticatorData.name}
+            {authenticatorData.metadataStatement.description}
           </span>
           <span className="text-sm text-gray-600">User: {item.user}</span>
           <span className="text-sm text-gray-600">
